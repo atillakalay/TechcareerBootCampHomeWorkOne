@@ -1,0 +1,40 @@
+﻿@model List<Order>
+
+<h1>Siparişler - @ViewBag.Employee.FirstName @ViewBag.Employee.LastName</h1>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Sipariş No</th>
+            <th>Sipariş Tarihi</th>
+            <th>Müşteri Adı</th>
+            <th>Ürünler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.OrderDate</td>
+                <td>
+                    @{
+                        try
+                        {
+                            var companyName = order.Customer != null ? order.Customer.CompanyName : "Müşteri Bulunamadı";
+                            @companyName
+                        }
+                        catch (Exception ex)
+                        {
+                            <p>Hata: @ex.Message</p>
+                        }
+                    }
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" asp-controller="Order" asp-action="Products" asp-route-orderId="@order.OrderId">Ürünler</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

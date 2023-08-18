@@ -1,0 +1,32 @@
+﻿@model Employee
+
+<div class="container">
+    <h1>Profil - @Model.FirstName @Model.LastName</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Adı:</strong> @Model.FirstName</p>
+            <p><strong>Soyadı:</strong> @Model.LastName</p>
+            <p><strong>Pozisyonu:</strong> @Model.Title</p>
+            <p><strong>Doğum Tarihi:</strong> @Model.BirthDate</p>
+            <p><strong>Telefonu:</strong> @Model.HomePhone</p>
+            <p><strong>Adresi:</strong> @Model.Address, @Model.City, @Model.Region, @Model.PostalCode, @Model.Country</p>
+        </div>
+    </div>
+    <hr />
+    <h2>İletişim Bilgilerini Güncelle</h2>
+    <form class="card" asp-action="UpdateProfile" method="post">
+        <input type="hidden" asp-for="EmployeeId" />
+        <div class="card-body">
+            <div class="form-group">
+                <label for="HomePhone">Telefon:</label>
+                <input type="text" id="HomePhone" class="form-control" name="HomePhone" asp-for="HomePhone" value="@Model.HomePhone" />
+            </div>
+            <div class="form-group">
+                <label for="Address">Adres:</label>
+                <input type="text" id="Address" class="form-control" name="Address" asp-for="Address" value="@Model.Address" />
+            </div>
+                <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+        </div>
+    </form>
+</div>
